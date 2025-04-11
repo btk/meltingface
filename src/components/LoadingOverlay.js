@@ -1,5 +1,4 @@
 import React from 'react';
-import styles from '@/styles/LoadingOverlay.css';
 
 const LoadingOverlay = () => {
   return (
