@@ -9,6 +9,10 @@ export default async function handler(req, res) {
 
   const { input } = req.body;
 
+  if (!input) {
+    return res.status(400).json({ error: "Input is required" });
+  }
+
   try {
     const prompt = `For the phrase "${input}", generate:
 
@@ -32,36 +36,48 @@ FontPage: https://fonts.google.com/specimen/YourFontName`;
     });
 
     const output = completion.choices[0].message.content;
+    console.log("OpenAI Response:", output);
 
     const paletteMatch = output.match(/Palette:\s*\[(.*?)\]/);
     const emojisMatch = output.match(/Emojis:\s*\[(.*?)\]/);
+    const quoteMatch = output.match(/Quote:\s*"(.*?)"/s);
+    const fontMatch = output.match(/Font:\s*(.+)/);
+    const fontLinkMatch = output.match(/FontLink:\s*<link.*?>/);
+    const fontPageMatch = output.match(/FontPage:\s*(https:\/\/fonts\.google\.com\/specimen\/[^\s]+)/);
 
-    const palette = paletteMatch?.[1]
+    if (!paletteMatch || !emojisMatch || !quoteMatch || !fontMatch || !fontLinkMatch || !fontPageMatch) {
+      console.error("Failed to parse OpenAI response:", {
+        paletteMatch,
+        emojisMatch,
+        quoteMatch,
+        fontMatch,
+        fontLinkMatch,
+        fontPageMatch
+      });
+      return res.status(500).json({ error: "Failed to parse OpenAI response" });
+    }
+
+    const palette = paletteMatch[1]
       .split(",")
       .map((c) => c.trim().replace(/['"]+/g, ""));
 
-    const emojis = emojisMatch?.[1]
+    const emojis = emojisMatch[1]
       .split(",")
       .map((e) => e.trim().replace(/['"]+/g, ""));
       
-    const quoteMatch = output.match(/Quote:\s*"(.*?)"/s);
-
-    const quote = quoteMatch?.[1] || "";
+    const quote = quoteMatch[1] || "";
     
-    const fontMatch = output.match(/Font:\s*(.+)/);
-    const fontLinkMatch = output.match(/FontLink:\s*<link.*?>/);
+    const font = fontMatch[1]?.trim() || "";
+    const fontLink = fontLinkMatch[0]?.trim() || "";
+    const fontPage = fontPageMatch[1]?.trim() || "";
 
-    const font = fontMatch?.[1]?.trim() || "";
-    const fontLink = fontLinkMatch?.[0]?.trim() || "";
+    const response = { palette, emojis, quote, font, fontLink, fontPage };
+    console.log("Parsed Response:", response);
 
-    const fontPageMatch = output.match(/FontPage:\s*(https:\/\/fonts\.google\.com\/specimen\/[^\s]+)/);
-
-    const fontPage = fontPageMatch?.[1]?.trim() || "";
-
-    res.status(200).json({ palette, emojis, quote, font, fontLink, fontPage });
+    res.status(200).json(response);
 
   } catch (error) {
-    console.error(error);
+    console.error("Error in generate API:", error);
     res.status(500).json({ error: "Something went wrong" });
   }
 }

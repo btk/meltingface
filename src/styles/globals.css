@@ -154,3 +154,151 @@ button:disabled {
 .font-link a:hover {
   text-decoration: underline;
 }
+
+.landing-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 2rem;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  max-width: 500px;
+  margin: 0 auto 2rem;
+  color: #666;
+  line-height: 1.5;
+}
+
+.input-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 3rem;
+}
+
+.examples-section {
+  margin-top: 3rem;
+  padding: 2rem 0;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.examples-section h2 {
+  font-size: 1.8rem;
+  color: #333;
+  margin-bottom: 2rem;
+}
+
+.examples-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+.example-card {
+  background: white;
+  border-radius: 16px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
+}
+
+.example-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+}
+
+.example-card h3 {
+  font-size: 1.4rem;
+  color: #ff4d6d;
+  margin-bottom: 1rem;
+}
+
+.example-colors {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.example-colors .color-box {
+  width: 40px;
+  height: 40px;
+}
+
+.example-emojis {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+.example-quote {
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.5;
+  margin-bottom: 1rem;
+  font-style: italic;
+}
+
+.example-font {
+  font-size: 0.9rem;
+  color: var(--darkest-color);
+  margin-top: 1rem;
+  padding: 0.5rem 0;
+  position: relative;
+}
+
+.example-font::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -0.5rem;
+  right: -0.5rem;
+  bottom: 0;
+  background: var(--lightest-color);
+  opacity: 0.2;
+  border-radius: 8px;
+  z-index: -1;
+  transition: opacity 0.2s ease;
+}
+
+.example-card:hover .example-font::before {
+  opacity: 0.3;
+}
+
+.example-font a {
+  color: var(--darkest-color) !important;
+  text-decoration: none;
+  font-weight: 500;
+  padding: 0.2rem 0.4rem;
+  border-radius: 4px;
+  background: var(--lightest-color);
+  opacity: 0.2;
+  transition: all 0.2s ease;
+}
+
+.example-font a:hover {
+  opacity: 0.3;
+  text-decoration: none;
+}
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-top: 2rem;
+  flex-wrap: wrap;
+}
+
+.footer {
+  text-align: center;
+  padding: 2rem 0;
+  margin-top: 2rem;
+  color: #666;
+  font-size: 0.9rem;
+  font-family: 'Fredoka', sans-serif;
+}
+
+.footer p {
+  margin: 0;
+}

@@ -1,0 +1,67 @@
+.example-card {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  margin: 10px;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.example-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.example-palette {
+  display: flex;
+  gap: 8px;
+  margin: 10px 0;
+}
+
+.color-swatch {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  transition: transform 0.2s ease;
+}
+
+.color-swatch:hover {
+  transform: scale(1.1);
+}
+
+.example-emojis {
+  display: flex;
+  gap: 8px;
+  margin: 10px 0;
+  font-size: 24px;
+}
+
+.emoji {
+  transition: transform 0.2s ease;
+}
+
+.emoji:hover {
+  transform: scale(1.2);
+}
+
+.example-quote {
+  font-size: 16px;
+  line-height: 1.5;
+  margin: 10px 0;
+  color: #333;
+}
+
+.example-font {
+  margin-top: 10px;
+}
+
+.example-font a {
+  text-decoration: none;
+  font-weight: 500;
+  transition: opacity 0.2s ease;
+}
+
+.example-font a:hover {
+  opacity: 0.8;
+} 
